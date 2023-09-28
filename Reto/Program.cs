@@ -1,5 +1,6 @@
 ﻿using Reto.Solucion1;
 using Reto.Solucion2;
+using Reto.Solucion3;
 using System;
 using System.Collections.Generic;
 
@@ -9,11 +10,12 @@ namespace Reto
     {
         static void Main(string[] args)
         {
-            // printSolution1();
-            printSolution2();
+            // PrintSolution1();
+            // PrintSolution2();
+            PrintSolution3();
         }
 
-        static void printSolution1()
+        static void PrintSolution1()
         {
             ICorreoElectronico mail = new CorreoElectronico();
             mail.SetEmisor("jjavierrg@gmail.com");
@@ -29,10 +31,10 @@ namespace Reto
 
         }
 
-        static void printSolution2()
+        static void PrintSolution2()
         {
             IEditorGráfico editor = new EditorGraficoPorConsola();
-            var formas = new List<IForma> { new Circulo(), new Rectangulo(), new Cuadrado() };
+            var formas = new List<IForma> { new Circulo(), new Solucion2.Rectangulo(), new Solucion2.Cuadrado() };
 
             formas.ForEach(forma =>
             {
@@ -41,5 +43,16 @@ namespace Reto
                 editor.BorrarForma(forma);
             });
         }
+
+        static void PrintSolution3()
+        {
+            IFiguraRectangular forma = new Solucion3.Rectangulo(5, 2);
+            PrintShapeArea(forma);
+
+            forma = new Solucion3.Cuadrado(4);
+            PrintShapeArea(forma);
+        }
+
+        static void PrintShapeArea(IFiguraRectangular forma) => Console.WriteLine($"El área de la forma rectangular es es: {forma.GetArea()}");
     }
 }
