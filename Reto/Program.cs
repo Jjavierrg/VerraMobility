@@ -2,6 +2,7 @@
 using Reto.Solucion2;
 using Reto.Solucion3;
 using Reto.Solucion4;
+using Reto.Solucion5;
 using System;
 using System.Collections.Generic;
 
@@ -14,7 +15,8 @@ namespace Reto
             // PrintSolution1();
             // PrintSolution2();
             // PrintSolution3();
-            PrintSolution4();
+            // PrintSolution4();
+            PrintSolution5();
         }
 
         static void PrintSolution1()
@@ -67,6 +69,15 @@ namespace Reto
                 jefe.ElegirTrabajador(trabajador);
                 jefe.Mandar();
             });
+        }
+
+        static void PrintSolution5()
+        {
+            IWindow window = new SmallWindow();
+            IDoor door = new RedDoor();
+
+            var house = new House(window, door);
+            Console.WriteLine(house.getDescription());
         }
 
     }
