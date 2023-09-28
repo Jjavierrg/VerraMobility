@@ -1,6 +1,7 @@
 ﻿using Reto.Solucion1;
 using Reto.Solucion2;
 using Reto.Solucion3;
+using Reto.Solucion4;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,8 @@ namespace Reto
         {
             // PrintSolution1();
             // PrintSolution2();
-            PrintSolution3();
+            // PrintSolution3();
+            PrintSolution4();
         }
 
         static void PrintSolution1()
@@ -54,5 +56,18 @@ namespace Reto
         }
 
         static void PrintShapeArea(IFiguraRectangular forma) => Console.WriteLine($"El área de la forma rectangular es es: {forma.GetArea()}");
+
+        static void PrintSolution4()
+        {
+            var trabajadores = new List<ITrabajador> { new TrabajadorPlanta(), new Desarrollador(), new Robot() };
+            var jefe = new JefeDespota();
+
+            trabajadores.ForEach(trabajador =>
+            {
+                jefe.ElegirTrabajador(trabajador);
+                jefe.Mandar();
+            });
+        }
+
     }
 }
