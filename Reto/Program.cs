@@ -1,5 +1,7 @@
 ﻿using Reto.Solucion1;
+using Reto.Solucion2;
 using System;
+using System.Collections.Generic;
 
 namespace Reto
 {
@@ -7,7 +9,8 @@ namespace Reto
     {
         static void Main(string[] args)
         {
-            printSolution1();
+            // printSolution1();
+            printSolution2();
         }
 
         static void printSolution1()
@@ -24,6 +27,19 @@ namespace Reto
             Console.WriteLine($"El contenido 2 del mensaje se establece como: {contenido2.GetContenidoCodificado()}");
             mail.SetContenido(contenido2);
 
+        }
+
+        static void printSolution2()
+        {
+            IEditorGráfico editor = new EditorGraficoPorConsola();
+            var formas = new List<IForma> { new Circulo(), new Rectangulo(), new Cuadrado() };
+
+            formas.ForEach(forma =>
+            {
+                editor.DibujarForma(forma);
+                editor.EditarForma(forma);
+                editor.BorrarForma(forma);
+            });
         }
     }
 }
