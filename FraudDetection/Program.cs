@@ -2,6 +2,7 @@
 {
     using FraudDetection.Entities;
     using FraudDetection.Normalizers;
+    using FraudDetection.Parsers;
     using FraudDetection.Readers;
     using FraudDetection.Validators;
     using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,9 @@
             var provider = ContainerManager.Configure();
 
             var validator = provider.GetService<IValidator<Order>>();
-            IOrderReader reader = new SampleOrderReader();
+            var parser = provider.GetRequiredService<IOrderParser>();
+            IOrderReader reader = new FileOrderReader("data.txt", parser);
+            // IOrderReader reader = new SampleOrderReader(parser);
 
             var orders = await reader.GetOrdersAsync();
             orders.ForEach(order => validator?.Validate(order));

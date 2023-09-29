@@ -3,6 +3,7 @@
     using FraudDetection.Comparators;
     using FraudDetection.Entities;
     using FraudDetection.Handlers;
+    using FraudDetection.Parsers;
     using FraudDetection.Validators;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,7 @@
             services.AddScoped<AddressValidationHandler>();
 
             services.AddScoped<IValidator<Order>, FraudValidator>();
+            services.AddTransient<IOrderParser, OrderParser>();
 
             return services.BuildServiceProvider();
         }
