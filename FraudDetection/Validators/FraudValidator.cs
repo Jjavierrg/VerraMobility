@@ -1,38 +1,34 @@
 ﻿namespace FraudDetection.Validators
 {
-    using FraudDetection.Comparators;
     using FraudDetection.Entities;
     using FraudDetection.Handlers;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     internal class FraudValidator : IValidator<Order>
     {
         IValidatorHandler validatorHandler;
-        public FraudValidator()
+        public FraudValidator(MailValidationHandler mailValidationHandler, AddressValidationHandler addressValidationHandler)
         {
-            var mailComparer = new MailComparer();
-            validatorHandler = new MailValidationHandler(mailComparer);
-
-            var addresComparer = new AddressComparer();
-            validatorHandler.SetNext(new AddressValidationHandler(addresComparer));
+            validatorHandler = mailValidationHandler;
+            validatorHandler.SetNext(addressValidationHandler);
         }
-        public IEnumerable<Order> GetNotValidValues(IList<Order> values)
+
+        public bool Validate(Order value)
         {
-            if (values == null)
-                return Enumerable.Empty<Order>();
-
-            var valid
-
-            var fraudIndex = new List<int>();
-            for (int i = 0; i < values.Count(); i++)
+            if (!validatorHandler.IsValid(value))
             {
-                if (values.Contains()
+                var duplicated = validatorHandler.GetDuplicatedOrder(value);
+                
+                if (duplicated?.DealId != value.DealId)
+                    return true;
+
+                if (duplicated == null || string.Equals(duplicated.CreditCard, value.CreditCard, StringComparison.OrdinalIgnoreCase))
+                    return true;
+
+                value.IsFraud = duplicated.IsFraud = true;
+                return false;
             }
+
+            return true;
         }
     }
 }

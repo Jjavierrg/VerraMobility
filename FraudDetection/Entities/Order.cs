@@ -27,5 +27,6 @@
         public string Email { get; set; }
         public Address Address { get; set; }
         public string CreditCard { get; set; }
+        public bool IsFraud { get; set; } = false;
     }
 }

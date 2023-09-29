@@ -5,7 +5,8 @@
     internal interface IValidatorHandler
     {
         IValidatorHandler SetNext(IValidatorHandler handler);
-        IList<Order> GetFraudOrders(IList<Order> orders);
+        bool IsValid(Order order);
+        Order? GetDuplicatedOrder(Order order);
     }
 
 }
